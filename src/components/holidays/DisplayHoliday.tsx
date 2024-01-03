@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import {SetStateAction, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../Deletecall.css";
 
-interface HolidayProps {
-  holidayData;
-  onSelectItem: (item: HolidayProps) => void;
-}
 
-const DisplayHoliday: React.FC<HolidayProps> = () => {
+const DisplayHoliday = () => {
   const [data, setData] = useState<any[]>([]);
   const [deleteId, setDeleteId] = useState(null);
   const navigate = useNavigate();
@@ -22,7 +18,7 @@ const DisplayHoliday: React.FC<HolidayProps> = () => {
         console.error("Error fetching data:", error);
       });
   }
-  const updateHoliday= (id) => {
+  const updateHoliday= (id: string) => {
     navigate("/EditHoliday/" + id);
   }
 
@@ -30,7 +26,7 @@ const DisplayHoliday: React.FC<HolidayProps> = () => {
     navigate("/AddHoliday/");
   }
   
-  const confirmDelete = (id) => {
+  const confirmDelete = (id: SetStateAction<null>) => {
     setDeleteId(id);
   }
 
@@ -38,11 +34,11 @@ const DisplayHoliday: React.FC<HolidayProps> = () => {
     setDeleteId(null);
   }
 
-  const executeDelete = (id) => {
+  const executeDelete = (id: string) => {
     fetch("http://localhost:5000/api/holiday/" + id, {
       method: "DELETE"
     })
-      .then((res) => {
+      .then(() => {
         getData();
         setDeleteId(null);
       })

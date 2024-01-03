@@ -30,7 +30,7 @@ const EditHoliday: React.FC = () => {
   };
 
   const hasValidationErrors = () => {
-    const errors = {};
+    const errors: Record<string, string> = {};
 
     if (!holiday.holidayName.trim()) {
       errors.holidayName = "Name cannot be empty";

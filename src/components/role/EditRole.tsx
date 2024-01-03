@@ -20,13 +20,13 @@ const EditRole: React.FC = () => {
             });
     }, [id]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
         setRole({ ...role, [name]: value });
     };
 
     const hasValidationErrors = () => {
-        const errors = {};
+        const errors: Record<string, string> = {};
       
         if (!role.roleName.trim()) {
           errors.roleName = "Name cannot be empty";

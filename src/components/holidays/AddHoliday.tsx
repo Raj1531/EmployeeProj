@@ -2,16 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-interface HolidayAddProps {
-  HolidayAddData;
-}
+
 
 interface HolidayProps {
   holidayName: string;
   holidayDateTime: string;
 }
 
-export default function HolidayForm(data: HolidayAddProps) {
+export default function HolidayForm() {
   const [holiday, setHoliday] = useState<HolidayProps>({
     holidayName: "",
     holidayDateTime: "",
@@ -20,7 +18,7 @@ export default function HolidayForm(data: HolidayAddProps) {
   const { opr } = useParams();
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setHoliday({ ...holiday, [name]: value });
   };
@@ -28,7 +26,8 @@ export default function HolidayForm(data: HolidayAddProps) {
   const [errorMsg, setErrorMsg] = useState<Record<string, string>>({});
 
   const hasValidationErrors = () => {
-    const errors = {};
+    const errors: Record<string, string> = {};
+
     if (!holiday.holidayName.trim()) {
       errors.holidayName = "Name cannot be empty";
     } else if (holiday.holidayName.trim().length <= 4) {

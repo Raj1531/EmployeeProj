@@ -17,7 +17,7 @@ import LearnMore from './components/LearnMore';
 import DisplayTime from './components/Time/DisplayTime';
 import ContactUs from './components/Contact';
 import AddRecord from './components/Time/AddRecord';
-
+import "./components/Deletecall.css"
 
 function App() {
 

@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../DeleteCall.css";
 
 const ReadEmployees: React.FC = () => {
   const { id } = useParams();
@@ -9,11 +8,11 @@ const ReadEmployees: React.FC = () => {
   const [deleteId, setDeleteId] = useState(null);
   const navigate = useNavigate();
 
-  const updateEmployee = (id) => {
+  const updateEmployee = (id: string) => {
     navigate("/EditEmployee/" + id);
   }
 
-  const confirmDelete = (id) => {
+  const confirmDelete = (id: SetStateAction<null>) => {
     setDeleteId(id);
   }
 
@@ -21,11 +20,11 @@ const ReadEmployees: React.FC = () => {
     setDeleteId(null);
   }
 
-  const executeDelete = (id) => {
+  const executeDelete = (id: string) => {
     fetch("http://localhost:5000/api/employee/" + id, {
       method: "DELETE"
     })
-      .then((res) => {
+      .then(() => {
         setDeleteId(null);
         navigate("/DisplayEmployees");
       })
@@ -47,7 +46,7 @@ const ReadEmployees: React.FC = () => {
       });
   }, [id]);
   
-  const formatDate = (dateTimeString) => {
+  const formatDate = (dateTimeString: string | number | Date) => {
     const date = new Date(dateTimeString); // Create a new Date object from the dateTimeString
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed, so we add 1

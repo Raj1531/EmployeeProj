@@ -1,10 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-
-interface EmployeeAddProps {
-  EmployeeAddData;
-}
+import { useNavigate } from "react-router-dom";
 
 interface EmployeeProps {
   employeeID: string;
@@ -17,7 +13,7 @@ interface EmployeeProps {
   roleID:string;
 }
 
-export default function EmployeeForm(data: EmployeeAddProps) {
+export default function EmployeeForm() {
   const [employee, setEmployee] = useState<EmployeeProps>({
     employeeID: "",
     employeeName: "",
@@ -32,15 +28,17 @@ export default function EmployeeForm(data: EmployeeAddProps) {
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [errorMsg, setErrorMsg] = useState<Record<string, string>>({});
+  
+ 
 
-  const handleChange = (e) => {
+  const handleChange = (e : any) => {
     const { name, value } = e.target;
     setEmployee({ ...employee, [name]: value });
   };
 
   const hasValidationErrors = () => {
-    const errors = {};
-
+    const errors: Record<string, string> = {};
+    
     if (!employee.employeeName.trim()) {
       errors.employeeName = "Name cannot be empty";
     } else if (employee.employeeName.trim().length < 4) {
@@ -88,8 +86,11 @@ export default function EmployeeForm(data: EmployeeAddProps) {
     } else if (parseInt(employee.employeeAcuredLeaves, 10) > 24) {
       errors.employeeAcuredLeaves = "Accrued Leaves cannot exceed 24 days per year";
     }
+    if(errors){
+      console.log(errors)
+    }
 
-    setErrorMsg(errors);
+    setErrorMsg(errors as Record<string, string>);
 
     return Object.keys(errors).length > 0;
   };
@@ -111,6 +112,8 @@ export default function EmployeeForm(data: EmployeeAddProps) {
   };
 
   useEffect(() => {
+    console.log("isSubmitDisabled:", isSubmitDisabled);
+    console.log("Component re-rendered");
     setIsSubmitDisabled(hasValidationErrors());
   }, [employee]);
 

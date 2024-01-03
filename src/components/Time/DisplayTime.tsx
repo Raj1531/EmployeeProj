@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
-interface TimeProps {
-  timeData;
-  onSelectItem: (item: TimeProps) => void;
-}
-
-const DisplayHoliday: React.FC<TimeProps> = () => {
+const DisplayHoliday = () => {
   const [data, setData] = useState<any[]>([]);
  
 

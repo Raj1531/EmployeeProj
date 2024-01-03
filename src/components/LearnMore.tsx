@@ -1,7 +1,8 @@
 
-import React from 'react';
 
 const LearnMore = () => {
+
+
   return (
     <div className="sticky-top"> 
     <section className="bsb-pricing-2 bg-light py-5 py-xl-8">
@@ -43,9 +44,6 @@ const LearnMore = () => {
     </div>
     </section>
     </div>
-     
-                  
-   
   );
 };
 

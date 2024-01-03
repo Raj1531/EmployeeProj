@@ -21,12 +21,13 @@ const EditEmployee: React.FC = () => {
 }, [id]);
 
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setEmployee({ ...employee, [name]: value });
   };
   const hasValidationErrors = () => {
-    const errors = {};
+    const errors: Record<string, string> = {};
+
     if (!employee.employeeName.trim()) {
       errors.employeeName = "Name cannot be empty";
     } else if (employee.employeeName.trim().length <= 4) {

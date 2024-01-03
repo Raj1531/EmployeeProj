@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import '../DeleteCall.css';
+import { SetStateAction, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-interface RoleProps {
-  RoleData;
-  onSelectItem: (item: RoleProps) => void;
-}
-
-const ReadRole: React.FC<RoleProps> = () => {
+const ReadRole = () => {
   const [data, setData] = useState<any[]>([]);
   const navigate = useNavigate();
   const [deleteId, setDeleteId] = useState(null);
@@ -22,11 +16,11 @@ const ReadRole: React.FC<RoleProps> = () => {
         console.error("Error fetching data:", error);
       });
   }
-  const updateRole = (id) => {
+  const updateRole = (id: string) => {
     navigate("/EditRole/" + id);
   }
 
-  const confirmDelete = (id) => {
+  const confirmDelete = (id: SetStateAction<null>) => {
     setDeleteId(id);
   }
 
@@ -35,11 +29,11 @@ const ReadRole: React.FC<RoleProps> = () => {
   }
   
 
-  const executeDelete = (id) => {
+  const executeDelete = (id: string) => {
     fetch("http://localhost:5000/api/roles/" + id, {
       method: "DELETE"
     })
-      .then((res) => {
+      .then(() => {
         getData();
         setDeleteId(null);
       })
